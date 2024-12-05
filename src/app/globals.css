@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+:root{
+  --red: rgb(207, 33, 66);
+  --orange: rgb(230, 173, 77);
+}
+
+html, body, #__next {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+#root, #__next {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+* {
+  box-sizing: inherit;
+}
