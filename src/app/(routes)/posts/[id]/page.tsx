@@ -12,7 +12,7 @@ export default async function SinglePostPage(props: { params: tParams }) {
   if (!session) {
     return redirect('/login');
   }
-  const profile = await prisma.profile.findUnique({
+  const profile = await prisma.profile.findFirst({
     where: {email: session?.user?.email as string},
   });
   if (profile?.username === undefined) {

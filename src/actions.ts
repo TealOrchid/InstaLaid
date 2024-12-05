@@ -41,7 +41,7 @@ export async function getSessionEmailOrThrow(): Promise<string> {
 export async function getSessionRole(): Promise<string> {
   const userEmail = await getSessionEmail();
   if (userEmail) {
-    const profile = await prisma.profile.findUnique({
+    const profile = await prisma.profile.findFirst({
       where: {
         email: userEmail,
       },

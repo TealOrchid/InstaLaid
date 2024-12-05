@@ -9,7 +9,7 @@ import Image from "next/image";
 export default async function DesktopNav() {
   const session = await auth();
   const user = !['mod', 'admin'].includes(await getSessionRole());
-  const profile = await prisma.profile.findUnique({
+  const profile = await prisma.profile.findFirst({
     where: {email: session?.user?.email as string},
   });
   return (

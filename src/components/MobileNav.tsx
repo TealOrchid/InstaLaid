@@ -8,7 +8,7 @@ import { prisma } from "@/db";
 export default async function MobileNav() {
   const session = await auth();
   const user = !['mod', 'admin'].includes(await getSessionRole());
-  const profile = await prisma.profile.findUnique({
+  const profile = await prisma.profile.findFirst({
     where: {email: session?.user?.email as string},
   });
   return (
