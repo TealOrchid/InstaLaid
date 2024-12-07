@@ -5,7 +5,6 @@ import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
 import { Avatar } from "@radix-ui/themes";
 import { PostForApproval, Profile } from "@prisma/client";
-import { redirect } from "next/navigation";
 import Image from "next/image";
 
 export default function SwipeablePost({
