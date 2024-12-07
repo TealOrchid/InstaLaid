@@ -18,10 +18,7 @@ export default function SwipeablePost({
   const profile = profiles.find(p => p.email === post.author);
   const swipeHandlers = useSwipeable({
     onSwipedLeft: async () => await deletePost(post.id),
-    onSwipedRight: async () => {
-      await approvePost(post.id);
-      redirect('/');
-    },
+    onSwipedRight: async () => await approvePost(post.id),
     preventScrollOnSwipe: true,
   });
 

@@ -133,7 +133,6 @@ export async function approvePost(postId: string) {
   const post = await prisma.postForApproval.findFirstOrThrow({
     where: { id: postId },
   });
-  await deletePost(postId);
   const postDoc = await prisma.post.create({
     data: {
       author: post.author,
@@ -142,6 +141,7 @@ export async function approvePost(postId: string) {
       createdAt: post.createdAt,
     },
   });
+  await deletePost(postId);
   return postDoc.id;
 }
 
