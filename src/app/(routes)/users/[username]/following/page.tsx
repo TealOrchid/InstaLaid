@@ -2,8 +2,10 @@ import { prisma } from "@/db";
 import { Avatar } from "@radix-ui/themes";
 import Link from "next/link";
 
-export default async function FollowingPage({ params }: { params: { username: string } }) {
-  const { username } = await params;
+type tUserProfileProps = Promise<{ username: string }>;
+
+export default async function FollowingPage(props: { params: tUserProfileProps }) {
+  const { username } = await props.params;
 
   const profile = await prisma.profile.findFirst({
     where: {
