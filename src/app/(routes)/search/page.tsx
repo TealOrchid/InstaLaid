@@ -6,11 +6,10 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/db";
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: { query: string };
-}) {
+type tSearchParams = Promise<{ query: string }>;
+
+export default async function SearchPage({ searchParams }: { searchParams: tSearchParams }) {
+  const { query } = await searchParams;
   const session = await auth();
 
   if (!session) {
@@ -24,8 +23,6 @@ export default async function SearchPage({
   if (profile?.username === undefined) {
     return redirect('/settings');
   }
-
-  const { query } = await searchParams;
 
   return (
     <div className="w-full">

@@ -4,13 +4,10 @@ import { prisma } from "@/db";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
-type Props = {
-  params: {
-    username: string;
-  };
-};
+type tUserProfileProps = Promise<{ username: string }>;
 
-export default async function UserProfilePage({ params }: Props) {
+export default async function UserProfilePage(props: { params: tUserProfileProps }) {
+  const { username } = await props.params;
   const session = await auth();
   
   if (!session) {
@@ -18,7 +15,6 @@ export default async function UserProfilePage({ params }: Props) {
   }
 
   const sessionEmail = await getSessionEmail() || '';
-  const { username } = params;
 
   const profileExists = await prisma.profile.findFirst({
     where: { email: session?.user?.email as string },

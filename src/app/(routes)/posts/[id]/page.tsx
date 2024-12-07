@@ -4,13 +4,10 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/db";
 
-type Props = {
-  params: {
-    id: string;
-  };
-};
+type tParams = Promise<{ id: string }>;
 
-export default async function SinglePostPage(props: Props) {
+export default async function SinglePostPage(props: { params: tParams }) {
+  const { id } = await props.params;
   const session = await auth();
 
   if (!session) {
@@ -25,7 +22,6 @@ export default async function SinglePostPage(props: Props) {
     return redirect('/settings');
   }
 
-  const { id } = await props.params;
   let post, authorProfile, comments, commentsAuthors, myLike, myDislike, myVtff, myBookmark;
 
   try {
