@@ -1,24 +1,26 @@
 'use client';
-import {vtffPost, removeVtffFromPost} from "@/actions";
-import {Vtff, Post, PostForApproval} from "@prisma/client";
-import {IconHandMiddleFinger} from '@tabler/icons-react';
-import {useRouter} from "next/navigation";
-import {useState} from "react";
+
+import { vtffPost, removeVtffFromPost } from "@/actions";
+import { Vtff, Post, PostForApproval } from "@prisma/client";
+import { IconHandMiddleFinger } from '@tabler/icons-react';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function VtffInfo({
   post,
   sessionVtff,
-  showText=true,
-}:{
-  post:Post|PostForApproval;
-  sessionVtff:Vtff|null;
-  showText?:boolean;
+  showText = true,
+}: {
+  post: Post | PostForApproval;
+  sessionVtff: Vtff | null;
+  showText?: boolean;
 }) {
   const router = useRouter();
   const [vtffedByMe, setVtffedByMe] = useState(!!sessionVtff);
+
   return (
     <form
-      action={async (data:FormData) => {
+      action={async (data: FormData) => {
         setVtffedByMe(prev => !prev);
         if (vtffedByMe) {
           await removeVtffFromPost(data);
@@ -27,12 +29,13 @@ export default function VtffInfo({
         }
         router.refresh();
       }}
-      className="flex items-center gap-2">
-      <input type="hidden" name="postId" value={post.id}/>
-      <button
-        type="submit"
-        className="">
-        <IconHandMiddleFinger className={vtffedByMe ? 'fill-green-500' : 'text-black'}/>
+      className="flex items-center gap-2"
+    >
+      <input type="hidden" name="postId" value={post.id} />
+      <button type="submit" className="">
+        <IconHandMiddleFinger
+          className={vtffedByMe ? 'fill-green-500' : 'text-black'}
+        />
       </button>
       {showText && (
         <p>{'vtffsCount' in post ? post.vtffsCount : 0}</p>

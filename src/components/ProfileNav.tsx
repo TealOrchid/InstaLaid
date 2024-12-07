@@ -1,18 +1,20 @@
 'use client';
+
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function ProfileNav({
-  isOurProfile=false,
+  isOurProfile = false,
   username,
-}:{
-  isOurProfile:boolean
-  username:string;
+}: {
+  isOurProfile: boolean;
+  username: string;
 }) {
   const path = usePathname();
   const bookmarkedActive = path.includes('/bookmarked');
   const pendingActive = path.includes('/pending');
   const postsActive = !bookmarkedActive && !pendingActive;
+
   return (
     <section className="mt-4">
       <div className="flex justify-center gap-4 font-bold">

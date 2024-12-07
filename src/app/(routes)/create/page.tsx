@@ -1,4 +1,5 @@
 'use client';
+
 import { postEntry } from "@/actions";
 import { Button, TextArea } from "@radix-ui/themes";
 import { IconCloudUpload, IconSend } from "@tabler/icons-react";
@@ -10,18 +11,21 @@ import Image from "next/image";
 export default function CreatePage() {
   const { data: session } = useSession();
   const [imageUrl, setImageUrl] = useState('');
-  const [file, setFile] = useState<File|null>(null);
+  const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const fileInRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
   useEffect(() => {
     if (!session) {
       return redirect('/login');
     }
+
     if (file) {
       setIsUploading(true);
       const data = new FormData();
       data.set("file", file);
+      
       fetch("/api/upload", {
         method: "POST",
         body: data,
@@ -33,18 +37,23 @@ export default function CreatePage() {
       });
     }
   }, [file, session]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!imageUrl) {
       alert('Please upload an image!');
       return;
     }
+
     const formData = new FormData(e.target as HTMLFormElement);
     const id = await postEntry(formData);
     router.push(`/posts/${id}`);
     router.refresh();
   };
+
   const isFormValid = imageUrl !== '';
+
   return (
     <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
       <input type="hidden" name="image" value={imageUrl} />
@@ -84,6 +93,7 @@ export default function CreatePage() {
             </div>
           </div>
         </div>
+
         <div className="flex flex-col gap-2">
           <TextArea
             name="description"
@@ -93,6 +103,7 @@ export default function CreatePage() {
           />
         </div>
       </div>
+
       <div className="flex mt-4 justify-center">
         <Button disabled={!isFormValid} type="submit" className="bg-aubergine">
           <IconSend size={20} />

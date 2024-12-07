@@ -1,31 +1,41 @@
 import Link from "next/link";
-import {auth, signOut} from "@/auth";
+import { auth, signOut } from "@/auth";
 import { getSessionRole } from "@/actions";
 import { redirect } from "next/navigation";
-import { IconCamera, IconHome, IconLayoutGrid, IconLogout, IconSearch, IconSettings, IconUser } from "@tabler/icons-react";
+import {
+  IconCamera,
+  IconHome,
+  IconLayoutGrid,
+  IconLogout,
+  IconSearch,
+  IconSettings,
+  IconUser,
+} from "@tabler/icons-react";
 import { prisma } from "@/db";
 import Image from "next/image";
 
 export default async function DesktopNav() {
   const session = await auth();
-  const user = !['mod', 'admin'].includes(await getSessionRole());
+  const user = !["mod", "admin"].includes(await getSessionRole());
   const profile = await prisma.profile.findFirst({
-    where: {email: session?.user?.email as string},
+    where: { email: session?.user?.email as string },
   });
+
   return (
     <div
       className="
-      hidden
-      md:block
-      px-4
-      pb-4
-      w-48
-      bg-gradient-to-b 
-      from-[#FF1493] 
-      via-[#00FF7F] 
-      to-[#FFD700] 
-      p-4
-      text-black"
+        hidden
+        md:block
+        px-4
+        pb-4
+        w-48
+        bg-gradient-to-b 
+        from-[#FF1493] 
+        via-[#00FF7F] 
+        to-[#FFD700] 
+        p-4
+        text-black
+      "
     >
       <div className="top-4 sticky">
         <Image
@@ -34,50 +44,49 @@ export default async function DesktopNav() {
           width={800}
           height={600}
           style={{
-            aspectRatio: 'initial',
+            aspectRatio: "initial",
           }}
           unoptimized
         />
         <div className="ml-1 inline-flex flex-col gap-6 mt-8 *:flex *:items-center *:gap-2">
-          <Link href={'/'}>
+          <Link href={"/"}>
             <IconHome />
             Home
           </Link>
-          <Link href={'/search'}>
+          <Link href={"/search"}>
             <IconSearch />
             Search
           </Link>
-          <Link href={'/browse'}>
+          <Link href={"/browse"}>
             <IconLayoutGrid />
             Browse
           </Link>
-          {(user && profile?.username !== undefined) && (
-              <Link href={'/create'}>
-                <IconCamera />
-                Create
-              </Link>
+          {user && profile?.username !== undefined && (
+            <Link href={"/create"}>
+              <IconCamera />
+              Create
+            </Link>
           )}
           {user && (
-            <Link href={'/profile'}>
+            <Link href={"/profile"}>
               <IconUser />
               Profile
             </Link>
           )}
           {!user && (
-            <Link href={'/settings'}>
+            <Link href={"/settings"}>
               <IconSettings />
               Settings
             </Link>
           )}
-          <form action={async () => {
-              'use server';
+          <form
+            action={async () => {
+              "use server";
               await signOut();
-              redirect('/login');
-            }}>
-            <button
-              type="submit"
-              className="flex items-center "
-            >
+              redirect("/login");
+            }}
+          >
+            <button type="submit" className="flex items-center">
               <IconLogout className="mr-2" />
               Logout
             </button>

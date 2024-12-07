@@ -4,11 +4,11 @@ import { Profile } from "@prisma/client";
 import { prisma } from "@/db";
 
 export default async function HomeUser({
-    profiles,
-  }: {
-    profiles: Profile[];
-  }) {
-const posts = await prisma.postForApproval.findMany({
+  profiles,
+}: {
+  profiles: Profile[];
+}) {
+  const posts = await prisma.postForApproval.findMany({
     where: { moderator: await getSessionEmailOrThrow() },
     orderBy: { createdAt: "asc" },
     take: 100,

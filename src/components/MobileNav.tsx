@@ -7,63 +7,44 @@ import { prisma } from "@/db";
 
 export default async function MobileNav() {
   const session = await auth();
-  const user = !['mod', 'admin'].includes(await getSessionRole());
+  const currentUserRole = await getSessionRole();
+  const isUser = !['mod', 'admin'].includes(currentUserRole);
   const profile = await prisma.profile.findFirst({
-    where: {email: session?.user?.email as string},
+    where: { email: session?.user?.email as string },
   });
+
+  const handleSignOut = async () => {
+    await signOut();
+    redirect('/login');
+  };
+
   return (
     <div className="block md:hidden fixed bottom-0 left-0 right-0">
-      <div className="flex text-gray-700 *:flex *:items-center">
-        <div className="md:block
-        bg-gradient-to-b 
-        from-[#FF1493] 
-        via-[#00FF7F] 
-        to-[#FFD700]
-        w-full
-        relative
-        z-10 
-        *:size-12
-        *:flex
-        *:items-center
-        *:justify-center
-        justify-around
-        text-black">
-          <Link href="/">
-            <IconHome/>
+      <div className="flex text-gray-700 bg-gradient-to-b from-[#FF1493] via-[#00FF7F] to-[#FFD700] w-full justify-around items-center py-2 z-10">
+        <Link href="/" className="flex items-center justify-center">
+          <IconHome />
+        </Link>
+        <Link href="/search" className="flex items-center justify-center">
+          <IconSearch />
+        </Link>
+        {isUser && profile?.username && (
+          <Link href="/create" className="flex items-center justify-center">
+            <IconCamera />
           </Link>
-          <Link href="/search">
-            <IconSearch/>
-          </Link>
-          {(user && profile?.username !== undefined) && (
-            <Link href="/create">
-              <IconCamera/>
-            </Link>
-          )}
-          <Link href="/browse">
-            <IconLayoutGrid/>
-          </Link>
-          <Link href="/profile">
-          {user && (
-              <><IconUser /></>
-            )}
-            {!user && (
-              <><IconSettings /></>
-            )}
-          </Link>
-          {!user && (
-            <form action={async () => {
-              'use server';
-              await signOut();
-              redirect('/login');
-            }}>
-            <button
-              type="submit"
-              className="flex items-center ">
-              <IconLogout/>
+        )}
+        <Link href="/browse" className="flex items-center justify-center">
+          <IconLayoutGrid />
+        </Link>
+        <Link href="/profile" className="flex items-center justify-center">
+          {isUser ? <IconUser /> : <IconSettings />}
+        </Link>
+        {!isUser && (
+          <form action={handleSignOut} className="flex items-center justify-center">
+            <button type="submit" className="flex items-center justify-center">
+              <IconLogout />
             </button>
           </form>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

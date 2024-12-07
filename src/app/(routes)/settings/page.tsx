@@ -1,35 +1,47 @@
 import { deleteProfile } from "@/actions";
-import {auth, signOut} from "@/auth";
+import { auth, signOut } from "@/auth";
 import SettingsForm from "@/components/SettingsForm";
-import {prisma} from "@/db";
+import { prisma } from "@/db";
 import { IconLogout, IconTrash } from "@tabler/icons-react";
 import { redirect } from "next/navigation";
 
 export default async function SettingsPage() {
   const session = await auth();
   const sessionEmail = session?.user?.email;
+
   if (!session) {
     return redirect('/login');
   }
+
   if (!sessionEmail) {
     return 'not logged in';
   }
+
   const profile = await prisma.profile.findFirst({
-    where: {email: sessionEmail},
+    where: { email: sessionEmail },
   });
+
   return (
     <div className="max-w-sm mx-auto">
       <h1 className="text-2xl font-bold mb-4 text-center text-neonblue">
         Profile settings
       </h1>
+
+      {/* Displaying the user's email */}
       <p className="text-magenta text-xs text-center -mt-4 mb-4">
         {sessionEmail}
       </p>
+
+      {/* Settings form */}
       <SettingsForm
         profile={profile}
-        role={profile?.role === undefined ? 'user' : profile?.role}
+        role={profile?.role || 'user'}
       />
+
+      {/* Logout and Delete profile buttons */}
       <div className="flex justify-center mt-4 pt-4 border-t border-gray-300 gap-4">
+        
+        {/* Logout button */}
         <form
           action={async () => {
             'use server';
@@ -45,6 +57,8 @@ export default async function SettingsPage() {
             <span>Logout</span>
           </button>
         </form>
+
+        {/* Delete profile button */}
         <form
           action={async () => {
             'use server';

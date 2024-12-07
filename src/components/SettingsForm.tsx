@@ -2,7 +2,7 @@
 
 import { updateProfile } from "@/actions";
 import { Profile } from "@prisma/client";
-import { Button, TextArea, TextField } from "@radix-ui/themes";
+import { Button, Switch, TextArea, TextField } from "@radix-ui/themes";
 import { IconCloudUpload } from "@tabler/icons-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,6 @@ export default function SettingsForm({
   const [usernameTaken, setUsernameTaken] = useState(false);
   const usernameRegex = /^[A-Za-z0-9\-_\.]+$/;
 
-  // Handle file upload and avatar preview
   useEffect(() => {
     if (file) {
       const data = new FormData();
@@ -58,7 +57,7 @@ export default function SettingsForm({
       setUsernameTaken(false);
     }
   };
-  
+
   return (
     <form
       action={async (data: FormData) => {
@@ -138,7 +137,7 @@ export default function SettingsForm({
       <p className="mt-2 font-bold text-xanadu">Bio</p>
       <TextArea
         name="bio"
-        defaultValue={profile?.bio || ""} 
+        defaultValue={profile?.bio || ""}
         placeholder="Tell us about yourself..."
         maxLength={256}
         className="bg-amarguinha"

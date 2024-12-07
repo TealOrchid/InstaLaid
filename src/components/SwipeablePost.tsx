@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Avatar } from "@radix-ui/themes";
 import { PostForApproval, Profile } from "@prisma/client";
 import Image from "next/image";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export default function SwipeablePost({
   post,
@@ -15,9 +16,22 @@ export default function SwipeablePost({
   profiles: Profile[];
 }) {
   const profile = profiles.find(p => p.email === post.author);
+
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: async () => await deletePost(post.id),
-    onSwipedRight: async () => await approvePost(post.id),
+    onSwipedLeft: async () => {
+      try {
+        await deletePost(post.id);
+      } catch (error) {
+        console.error("Error deleting post:", error);
+      }
+    },
+    onSwipedRight: async () => {
+      try {
+        await approvePost(post.id);
+      } catch (error) {
+        console.error("Error approving post:", error);
+      }
+    },
     preventScrollOnSwipe: true,
   });
 
@@ -27,7 +41,7 @@ export default function SwipeablePost({
         <Image
           className="rounded-lg"
           src={post.image}
-          alt="Post"
+          alt={post.description || "Post Image"}
           width={800}
           height={600}
           style={{
@@ -43,6 +57,36 @@ export default function SwipeablePost({
         </Link>
       </div>
       <p className="mt-2 text-cyan text-left">{post.description}</p>
+      <div className="flex justify-between mt-4">
+        <button
+          className="px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-700"
+          onClick={async (e) => {
+            e.preventDefault();
+            try {
+              await deletePost(post.id);
+            } catch (error) {
+              console.error("Error deleting post:", error);
+            }
+          }}
+          aria-label="Delete Post"
+        >
+          <IconX />
+        </button>
+        <button
+          className="px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-700"
+          onClick={async (e) => {
+            e.preventDefault();
+            try {
+              await approvePost(post.id);
+            } catch (error) {
+              console.error("Error approving post:", error);
+            }
+          }}
+          aria-label="Approve Post"
+        >
+          <IconCheck />
+        </button>
+      </div>
     </div>
   );
 }

@@ -13,14 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-    return (
-      <html lang="en">
-        <body>
-          <SessionProvider>
-            <>{children}</>
-          </SessionProvider>
-        </body>
-      </html>
-    );
-  }
-  
+  return (
+    <html lang="en">
+      <body>
+        <SessionProvider>
+          <>{children}</>
+        </SessionProvider>
+      </body>
+    </html>
+  );
+}

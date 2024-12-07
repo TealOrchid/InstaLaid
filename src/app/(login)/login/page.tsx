@@ -8,11 +8,13 @@ import Image from "next/image";
 export default function Login() {
   const { data: session } = useSession();
   const router = useRouter();
+
   useEffect(() => {
     if (session) {
       router.push('/');
     }
   }, [session, router]);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const result = await signIn('google', {
@@ -24,6 +26,7 @@ export default function Login() {
       console.error('Error during sign-in');
     }
   };
+
   return (
     <div
       className="min-h-screen bg-gradient-to-r from-green-300 via-yellow-400 to-pink-500 animate-gradient-x flex items-center justify-center p-4"

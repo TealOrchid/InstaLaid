@@ -1,6 +1,6 @@
 import PostsGrid from "@/components/PostsGrid";
-import {prisma} from "@/db";
-import {auth} from "@/auth";
+import { prisma } from "@/db";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
 export default async function BrowsePage() {
@@ -8,19 +8,23 @@ export default async function BrowsePage() {
   if (!session) {
     return redirect('/login');
   }
+
   const profile = await prisma.profile.findFirst({
-    where: {email: session?.user?.email as string},
+    where: { email: session?.user?.email as string },
   });
+
   if (profile?.username === undefined) {
     return redirect('/settings');
   }
+
   const posts = await prisma.post.findMany({
-    orderBy: {createdAt: 'desc'},
+    orderBy: { createdAt: 'desc' },
     take: 100,
   });
+
   return (
     <div>
-      <PostsGrid posts={posts}/>
+      <PostsGrid posts={posts} />
     </div>
   );
 }
