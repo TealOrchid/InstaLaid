@@ -14,6 +14,7 @@ export default function SearchForm() {
         name="query"
         placeholder="Search for posts or users..."
         maxLength={64}
+        className="bg-amarguinha"
       >
         <TextField.Slot>
           <IconSearch />

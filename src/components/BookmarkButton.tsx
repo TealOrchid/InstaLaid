@@ -30,7 +30,7 @@ export default function BookmarkButton({
       <button
         type="submit"
         className="">
-          <IconBookmark className={bookmarkedByMe ? 'fill-gray-800 dark:text-white dark:fill-white' : 'dark:text-white'}/>
+          <IconBookmark className={bookmarkedByMe ? 'fill-magenta' : 'text-black'}/>
       </button>
     </form>
   );

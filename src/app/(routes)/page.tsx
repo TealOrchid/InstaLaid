@@ -1,11 +1,11 @@
-import {auth} from "@/auth";
 import Preloader from "@/components/Preloader";
-import UserHome from "@/components/UserHome";
-import { prisma } from "@/db";
+import Home from "@/components/Home";
 import { redirect } from "next/navigation";
-import {Suspense} from "react";
+import { Suspense } from "react";
+import { prisma } from "@/db";
+import {auth} from "@/auth";
 
-export default async function Home() {
+export default async function Main() {
   const session = await auth();
   if (!session) {
     return redirect('/login');
@@ -19,7 +19,7 @@ export default async function Home() {
   return (
     <div className="">
         <Suspense fallback={<Preloader />}>
-          <UserHome session={session} />
+          <Home session={session} />
         </Suspense>
     </div>
   );

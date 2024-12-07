@@ -17,32 +17,22 @@ export default function ProfileNav({
     <section className="mt-4">
       <div className="flex justify-center gap-4 font-bold">
         <Link
-          className={
-            postsActive
-              ? 'text-gray-800 dark:text-gray-300'
-              : "text-gray-400 dark:text-gray-600"
-        }
-          href={isOurProfile ? '/profile' : `/users/${username}`}>
+          className={postsActive ? 'text-black' : "text-white"}
+          href={isOurProfile ? '/profile' : `/users/${username}`}
+        >
           Posts
         </Link>
         {isOurProfile && (
           <Link
-            className={
-              bookmarkedActive
-                ? 'text-gray-800 dark:text-gray-300'
-                : "text-gray-400 dark:text-gray-600"
-          }
-            href={'/profile/bookmarked'}>
+            className={bookmarkedActive ? 'text-black' : "text-white"}
+            href={'/profile/bookmarked'}
+          >
             Bookmarked
           </Link>
         )}
         {isOurProfile && (
           <Link
-            className={
-              pendingActive
-                ? 'text-gray-800 dark:text-gray-300'
-                : "text-gray-400 dark:text-gray-600"
-            }
+            className={pendingActive ? 'text-black' : "text-white"}
             href="/profile/pending"
           >
             Pending Approval

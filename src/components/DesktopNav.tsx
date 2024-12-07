@@ -20,16 +20,15 @@ export default async function DesktopNav() {
       px-4
       pb-4
       w-48
-      shadow-md
       bg-gradient-to-b 
       from-[#FF1493] 
       via-[#00FF7F] 
       to-[#FFD700] 
-      p-4"
+      p-4
+      text-black"
     >
       <div className="top-4 sticky">
-        <Image 
-          className="dark:invert"
+        <Image
           src="https://harlequin-keen-chickadee-753.mypinata.cloud/files/bafkreifatxsgok3qmpgee3wnnm52mieitsrul7in6vzvdortkc7jie6b6u"
           alt="InstaLaid"
           width={800}
@@ -58,20 +57,18 @@ export default async function DesktopNav() {
                 Create
               </Link>
           )}
-          <Link href={'/profile'}>
-            {user && (
-              <>
+          {user && (
+            <Link href={'/profile'}>
               <IconUser />
               Profile
-              </>
-            )}
-            {!user && (
-              <>
+            </Link>
+          )}
+          {!user && (
+            <Link href={'/settings'}>
               <IconSettings />
               Settings
-              </>
-            )}
-          </Link>
+            </Link>
+          )}
           <form action={async () => {
               'use server';
               await signOut();
@@ -82,7 +79,7 @@ export default async function DesktopNav() {
               className="flex items-center "
             >
               <IconLogout className="mr-2" />
-                Logout
+              Logout
             </button>
           </form>
         </div>

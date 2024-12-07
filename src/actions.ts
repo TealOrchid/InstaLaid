@@ -72,6 +72,9 @@ export async function updateProfile(data: FormData, role: string) {
   if (leoProfanity.check(nameText)) {
     nameText = usernameText;
   }
+  if (nameText === "undefined") {
+    nameText = usernameText;
+  }
   let subtitleText = data.get('subtitle') as string;
   if (leoProfanity.check(subtitleText)) {
     subtitleText = maskProfanity(subtitleText);
@@ -130,7 +133,7 @@ export async function approvePost(postId: string) {
   const post = await prisma.postForApproval.findFirstOrThrow({
     where: { id: postId },
   });
-  deleteApprovedPost(postId);
+  await deletePost(postId);
   const postDoc = await prisma.post.create({
     data: {
       author: post.author,

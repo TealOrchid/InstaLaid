@@ -12,10 +12,9 @@ export default async function MobileNav() {
     where: {email: session?.user?.email as string},
   });
   return (
-    <div className="block md:hidden fixed bottom-0 left-0 right-0 shadow-[0_-4px_4px_-1px_rgba(0,0,0,0.1)] shadow-gray-400 dark:shadow-gray-600">
-      <div className="flex text-gray-700 dark:text-gray-300 *:flex *:items-center">
-        <div className="block
-        shadow-md
+    <div className="block md:hidden fixed bottom-0 left-0 right-0">
+      <div className="flex text-gray-700 *:flex *:items-center">
+        <div className="md:block
         bg-gradient-to-b 
         from-[#FF1493] 
         via-[#00FF7F] 
@@ -27,7 +26,8 @@ export default async function MobileNav() {
         *:flex
         *:items-center
         *:justify-center
-        justify-around">
+        justify-around
+        text-black">
           <Link href="/">
             <IconHome/>
           </Link>

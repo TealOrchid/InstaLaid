@@ -32,7 +32,7 @@ export default function VtffInfo({
       <button
         type="submit"
         className="">
-        <IconHandMiddleFinger className={vtffedByMe ? 'text-red-500 fill-red-500' : 'dark:text-white'}/>
+        <IconHandMiddleFinger className={vtffedByMe ? 'fill-green-500' : 'text-black'}/>
       </button>
       {showText && (
         <p>{'vtffsCount' in post ? post.vtffsCount : 0}</p>

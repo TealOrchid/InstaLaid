@@ -7,22 +7,23 @@ import { redirect } from "next/navigation";
 
 export default async function SettingsPage() {
   const session = await auth();
+  const sessionEmail = session?.user?.email;
   if (!session) {
     return redirect('/login');
   }
-  if (!session?.user?.email) {
+  if (!sessionEmail) {
     return 'not logged in';
   }
   const profile = await prisma.profile.findFirst({
-    where: {email: session.user.email},
+    where: {email: sessionEmail},
   });
   return (
     <div className="max-w-sm mx-auto">
-      <h1 className="text-2xl font-bold mb-4 text-center">
+      <h1 className="text-2xl font-bold mb-4 text-center text-neonblue">
         Profile settings
       </h1>
-      <p className="text-gray-500 text-xs text-center -mt-4 mb-4">
-        {session.user.email}
+      <p className="text-magenta text-xs text-center -mt-4 mb-4">
+        {sessionEmail}
       </p>
       <SettingsForm
         profile={profile}
@@ -38,7 +39,7 @@ export default async function SettingsPage() {
         >
           <button
             type="submit"
-            className="flex items-center gap-1 bg-violet-500 text-gray-300 px-3 py-2 rounded-md hover:bg-violet-600"
+            className="flex items-center gap-1 bg-puce text-white px-3 py-2 rounded-md hover:bg-aubergine"
           >
             <IconLogout />
             <span>Logout</span>
@@ -47,16 +48,13 @@ export default async function SettingsPage() {
         <form
           action={async () => {
             'use server';
+            await deleteProfile(sessionEmail);
             await signOut();
-            if (session.user?.email) {
-              await deleteProfile(session.user.email);
-            }
-            redirect('/');
           }}
         >
           <button
             type="submit"
-            className="flex items-center gap-1 bg-red-500 text-gray-300 px-3 py-2 rounded-md hover:bg-red-600"
+            className="flex items-center gap-1 bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
           >
             <IconTrash />
             <span>Delete</span>

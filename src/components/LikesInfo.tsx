@@ -32,7 +32,7 @@ export default function LikesInfo({
       <button
         type="submit"
         className="">
-        <IconThumbUp className={likedByMe ? 'text-red-500 fill-red-500' : 'dark:text-white'} />
+        <IconThumbUp className={likedByMe ? 'fill-blue-500' : 'text-black'} />
       </button>
       {showText && (
         <p>{'likesCount' in post ? post.likesCount : 0}</p>

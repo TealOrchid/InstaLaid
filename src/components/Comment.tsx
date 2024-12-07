@@ -31,14 +31,14 @@ export default async function Comment ({
       <div className="w-full">
         <div className="flex justify-between gap-2">
           <Link href={`/users/${authorProfile?.username}`}>
-            <h3 className="flex gap-1 dark:text-gray-300">
+            <h3 className="flex gap-1 text-left">
               {authorProfile?.name}
             </h3>
-            <h4 className="text-gray-600 dark:text-gray-500 text-sm -mt-1">
+            <h4 className="text-purple-900 text-sm -mt-1 text-left">
               @{authorProfile?.username}
             </h4>
           </Link>
-          {(isOwner || mod) && ( // Conditionally render the delete button if the user is the owner
+          {(isOwner || mod) && (
             (<form
               action={async () => {
                 "use server";
@@ -49,18 +49,18 @@ export default async function Comment ({
               }}
             >
               <button type="submit" className="flex items-center">
-                <IconTrash />
+                <IconTrash className="text-black"/>
               </button>
             </form>)
           )}
         </div>
         <div>
-          <div className="bg-gray-200 dark:bg-gray-700 border dark:border-0 dark:text-gray-400 border-gray-300 rounded-md p-4 mt-2">
+          <div className="bg-beige rounded-md p-4 mt-2 text-left text-cyan">
             <p>
               {text}
             </p>
           </div>
-          <div className="text-xs text-gray-400 text-right">
+          <div className="text-xs text-black text-right">
             {format(createdAt, 'yyyy-MM-dd HH:mm:ss')}
           </div>
         </div>

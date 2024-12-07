@@ -25,11 +25,11 @@ export default async function SearchResults({query}:{query:string}) {
         Search results for &quot;{query}&quot;
       </h1>
       {profiles?.length > 0 && (
-        <div className="grid mt-4 sm:grid-cols-2 gap-2">
+        <div className="grid mt-4 sm:grid-cols-1 gap-2">
           {profiles.map(profile => (
             <Link
               href={`/users/${profile.username}`}
-              className="flex gap-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-2 rounded-full"
+              className="flex gap-2 bg-beige border border-beige p-2 rounded-full text-left"
               key={profile.id}
             >
               <div className="">
@@ -40,8 +40,8 @@ export default async function SearchResults({query}:{query:string}) {
                   src={profile.avatar || ''}/>
               </div>
               <div>
-                <h3>{profile.name}</h3>
-                <h4 className="text-gray-500 dark:text-gray-300 text-sm">
+                <h3 className="text-neonblue">{profile.name}</h3>
+                <h4 className="text-cyan text-sm">
                   @{profile.username}
                 </h4>
               </div>

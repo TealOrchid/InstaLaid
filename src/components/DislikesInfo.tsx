@@ -34,7 +34,7 @@ export default function DislikesInfo({
       <button
         type="submit"
         className="">
-        <IconThumbDown className={dislikedByMe ? 'text-red-500 fill-red-500' : 'dark:text-white'} />
+        <IconThumbDown className={dislikedByMe ? 'fill-red-500' : 'text-black'} />
       </button>
       {showText && (
         <p>{'dislikesCount' in post ? post.dislikesCount : 0}</p>

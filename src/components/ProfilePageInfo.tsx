@@ -21,7 +21,7 @@ export default async function ProfilePageInfo({
         <div className="flex-1 flex justify-center">
           <div className="font-bold flex items-center gap-2">
             {profile.username}
-            <div className="w-5 h-5 rounded-full bg-ig-red inline-flex justify-center items-center text-white">
+            <div className="w-5 h-5 rounded-full bg-icterine inline-flex justify-center items-center text-black">
               <IconCheck size={16} />
             </div>
           </div>
@@ -33,8 +33,8 @@ export default async function ProfilePageInfo({
         )}
       </section>
       <section className="mt-8 flex justify-center">
-        <div className="w-48 h-48 p-2 rounded-full bg-gradient-to-tr from-ig-orange to-ig-red">
-          <div className="w-44 h-44 p-2 bg-white dark:bg-black rounded-full">
+        <div className="w-48 h-48 p-2 rounded-full bg-icterine">
+          <div className="w-44 h-44 p-2 bg-white rounded-full">
             <div className="w-40 h-40 aspect-square overflow-hidden rounded-full">
               <Image
                 className=""

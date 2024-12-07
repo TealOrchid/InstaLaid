@@ -17,16 +17,16 @@ export default function SwipeablePost({
 }) {
   const profile = profiles.find(p => p.email === post.author);
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => deletePost(post.id),
-    onSwipedRight: () => {
-      approvePost(post.id);
+    onSwipedLeft: async () => await deletePost(post.id),
+    onSwipedRight: async () => {
+      await approvePost(post.id);
       redirect('/');
     },
     preventScrollOnSwipe: true,
   });
 
   return (
-    <div {...swipeHandlers} className="p-4 bg-gray-200 dark:bg-gray-800 rounded-lg">
+    <div {...swipeHandlers} className="p-2 bg-beige rounded-lg">
       <Link href={`/posts/${post.id}`}>
         <Image
           className="rounded-lg"
@@ -42,11 +42,11 @@ export default function SwipeablePost({
       </Link>
       <div className="flex gap-2 mt-4 items-center">
         <Avatar radius="full" src={profile?.avatar || ''} size="2" fallback="avatar" />
-        <Link href={`/users/${profile?.username}`} className="font-bold text-gray-700 dark:text-gray-300">
+        <Link href={`/users/${profile?.username}`} className="font-bold text-neonblue">
           {profile?.name}
         </Link>
       </div>
-      <p className="mt-2 text-gray-600 dark:text-gray-400">{post.description}</p>
+      <p className="mt-2 text-cyan text-left">{post.description}</p>
     </div>
   );
 }

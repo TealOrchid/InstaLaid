@@ -50,7 +50,7 @@ export default function CreatePage() {
       <input type="hidden" name="image" value={imageUrl} />
       <div className="flex flex-col gap-4">
         <div>
-          <div className="min-h-64 p-2 bg-gray-400 rounded-md relative">
+          <div className="min-h-64 p-2 bg-icterine rounded-md relative">
             {imageUrl && (
               <Image
                 className="rounded-md"
@@ -76,6 +76,7 @@ export default function CreatePage() {
                 onClick={() => fileInRef?.current?.click()}
                 type="button"
                 variant="surface"
+                className="bg-aubergine text-white"
               >
                 {!isUploading && <IconCloudUpload size={20} />}
                 {isUploading ? 'Uploading...' : 'Choose image'}
@@ -86,14 +87,14 @@ export default function CreatePage() {
         <div className="flex flex-col gap-2">
           <TextArea
             name="description"
-            className="h-16"
+            className="h-16 bg-amarguinha"
             placeholder="Add photo description..."
             maxLength={256}
           />
         </div>
       </div>
       <div className="flex mt-4 justify-center">
-        <Button disabled={!isFormValid} type="submit">
+        <Button disabled={!isFormValid} type="submit" className="bg-aubergine">
           <IconSend size={20} />
           Publish
         </Button>
