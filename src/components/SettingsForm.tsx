@@ -2,7 +2,7 @@
 
 import { updateProfile } from "@/actions";
 import { Profile } from "@prisma/client";
-import { Button, Switch, TextArea, TextField } from "@radix-ui/themes";
+import { Button, TextArea, TextField } from "@radix-ui/themes";
 import { IconCloudUpload } from "@tabler/icons-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
