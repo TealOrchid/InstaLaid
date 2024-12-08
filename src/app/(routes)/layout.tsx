@@ -38,7 +38,7 @@ export default function RootLayout({
               <DesktopNav />
               <MobileNav />
               <div className="flex-1 p-8 bg-gradient-to-br from-[#8B4513] via-[#00FF00] to-[#FF0000] text-center">
-                <div className="w-full bg-transparent border-b-[5rem] md:border-none">
+                <div className="w-full bg-transparent border-b-[5rem] md:border-none border-transparent">
                   {children}
                 </div>
               </div>
