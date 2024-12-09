@@ -14,6 +14,7 @@ export default async function MobileNav() {
   });
 
   const handleSignOut = async () => {
+    'use server';
     await signOut();
     redirect('/login');
   };
