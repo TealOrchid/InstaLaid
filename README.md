@@ -28,9 +28,9 @@ InstaLaid est une application web humoristique où les utilisateurs peuvent publ
 
 ## **Prérequis**
 - Avant de commencer, assurez-vous d'avoir installé les outils suivants sur votre machine :
-1. **Node.js** (version 16 ou supérieure) : [Télécharger Node.js](https://nodejs.org/)
-2. **Git** : [Télécharger Git](https://git-scm.com/)
-3. Un éditeur de code (comme [Visual Studio Code](https://code.visualstudio.com/)).
+  1. **Node.js** (version 16 ou supérieure) : [Télécharger Node.js](https://nodejs.org/)
+  2. **Git** : [Télécharger Git](https://git-scm.com/)
+  3. Un éditeur de code (comme [Visual Studio Code](https://code.visualstudio.com/)).
 - Compte MongoDB Atlas pour la base de données
 - Compte Pinata Cloud pour le stockage des images
 - Compte Vercel pour déployer le site
@@ -130,7 +130,5 @@ Si vous souhaitez déployer le projet sur **Vercel** :
 ## **Accès au site originel**
 Vous pouvez accéder à la version en ligne du site ici :  
 👉 [https://www.instalaid.vercel.app](https://www.instalaid.vercel.app)
-
----
 
 Vous êtes prêt à utiliser **InstaLaid** ! 🎉
