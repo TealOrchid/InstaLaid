@@ -21,8 +21,8 @@ InstaLaid est une application web humoristique où les utilisateurs peuvent publ
 - **Base de données** : MongoDB Atlas
 - **Stockage des images** : Pinata Cloud
 - **ORM** : Prisma
-- **Authentification** : Google OAuth via NextAuth.js
-- **Hébergement** : Vercel
+- **Authentification** : Google OAuth via Auth.js
+- **Hébergement** : Vercel (optionnel)
 
 ---
 
@@ -37,7 +37,7 @@ InstaLaid est une application web humoristique où les utilisateurs peuvent publ
 
 ---
 
-## **étapes d'installation**
+## **Étapes d'installation**
 
 ### **1. Cloner le repository GitHub**
 1. Ouvrez un terminal ou une invite de commande.
